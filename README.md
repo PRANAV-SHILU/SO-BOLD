@@ -1,13 +1,10 @@
-# React + Vite
+# SO-BOLD
 
-# React js task practice veyondtech
+This is a React-based web application built with Vite.
 
-make a layout component where header and footer and outlet
+## Tech Stack
 
-change home to layout in route as index true;
-
-make two layout route first for global means serivce about. then for news category
-
-
-
-give header  pdding bottom, remove .page style
+- **Framework:** [React.js](https://reactjs.org/)
+- **Bundler:** [Vite](https://vitejs.dev/)
+- **Routing:** [React Router](https://reactrouter.com/)
+- **Linting:** [ESLint](https://eslint.org/)
