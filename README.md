@@ -2,7 +2,6 @@
 
 > [!IMPORTANT]
 > **WORK IN PROGRESS**
-> This is my first developed site in React after learning the library. I am applying what I have learned to build this project.
 
 ## Overview
 
