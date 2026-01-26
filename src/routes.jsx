@@ -71,7 +71,9 @@ const router = createBrowserRouter(
       ],
     },
   ],
-  { base: "/SO-BOLD/" },
+  {
+    basename: "/SO-BOLD",
+  },
 );
 
 export default router;
