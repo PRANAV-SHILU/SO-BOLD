@@ -1,25 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useLoaderData, useNavigate } from "react-router";
 
 export default function NewsList() {
+  useEffect(() => {
+    document.title = "News & Blogs | SO BOLD";
+  });
+
   // View more functionality
-  const articles = useLoaderData();
-  const [visibleCount, setVisibleCount] = useState(2);
-  const visibleArticles = articles.slice(0, visibleCount);
+  // const articles = useLoaderData();
+  // const [visibleCount, setVisibleCount] = useState(4);
+  // const visibleArticles = articles.slice(0, visibleCount);
 
   // pagination functionality
-  // const { posts, totalPages, currentPage } = useLoaderData();
-  // const navigate = useNavigate();
+  const { posts, totalPages, currentPage } = useLoaderData();
+  const navigate = useNavigate();
 
-  // function goToPage(page) {
-  //   navigate(`?page=${page}`);
-  // }
+  function goToPage(page) {
+    navigate(`?page=${page}`);
+  }
 
   return (
     <section>
       {/* pagination functionality  */}
 
-      {/* <div className="article-list">
+      <div className="article-list">
         {posts.map((article) => (
           <ArticleCard key={article.id} data={article} />
         ))}
@@ -27,24 +31,28 @@ export default function NewsList() {
 
       <div className="pagination">
         <button
+          style={{ display: "flex", gap: "5px", alignItems: "center" }}
           disabled={currentPage === 1}
           onClick={() => goToPage(currentPage - 1)}
         >
+          <i class="bi bi-arrow-left"></i>
           Prev
         </button>
         <span>
           Showing Page {currentPage} of {totalPages}
         </span>
         <button
+          style={{ display: "flex", gap: "5px", alignItems: "center" }}
           disabled={currentPage === totalPages}
           onClick={() => goToPage(currentPage + 1)}
         >
           Next
+          <i class="bi bi-arrow-right"></i>
         </button>
-      </div>  */}
+      </div>
 
       {/* view more functionality */}
-      <div className="article-list">
+      {/* <div className="article-list">
         {visibleArticles.map((article) => (
           <ArticleCard key={article.id} data={article} />
         ))}
@@ -52,7 +60,7 @@ export default function NewsList() {
 
       <div className="view-more-wrapper">
         <button
-          disabled={visibleCount <= 2}
+          disabled={visibleCount <= 4}
           onClick={() => setVisibleCount((e) => e - 2)}
           className="view-more-btn"
         >
@@ -65,12 +73,13 @@ export default function NewsList() {
         >
           View More
         </button>
-      </div>
+      </div> */}
     </section>
   );
 }
 
 function ArticleCard({ data }) {
+  // console.log(data._embedded?.["wp:term"]?.[0]?.[0]?.name);
   return (
     <NavLink to={`/post/${data.id}`}>
       <div className="article-card">
@@ -88,16 +97,25 @@ function ArticleCard({ data }) {
         <div className="article-info">
           <div className="article-categories">
             <span>{data?.primaryTag || "News"}</span>
-            <span className="article-badge">
-              {data?.category || "Uncategorized"}
-            </span>
+            {data._embedded?.["wp:term"]?.[0]?.map((category) => (
+              <span key={category.id} className="article-badge">
+                {category.name}
+              </span>
+            ))}
           </div>
 
-          <h3 className="article-title">
+          {/* <h3 className="article-title">
             {data?.title?.rendered || "No Title"}
-          </h3>
+          </h3> */}
 
-          <div>{data?.readTime || "No Read Time"}</div>
+          <h3
+            className="article-title"
+            dangerouslySetInnerHTML={{
+              __html: data.title.rendered,
+            }}
+          />
+
+          {/* <div>{data?.readTime || "No Read Time"}</div> */}
         </div>
       </div>
     </NavLink>
