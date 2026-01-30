@@ -104,10 +104,6 @@ function ArticleCard({ data }) {
             ))}
           </div>
 
-          {/* <h3 className="article-title">
-            {data?.title?.rendered || "No Title"}
-          </h3> */}
-
           <h3
             className="article-title"
             dangerouslySetInnerHTML={{
